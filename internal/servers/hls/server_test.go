@@ -186,7 +186,7 @@ func TestServerRead(t *testing.T) {
 
 			strm := &stream.Stream{
 				WriteQueueSize:     512,
-				UDPMaxPayloadSize:  1472,
+				RTPMaxPayloadSize:  1450,
 				Desc:               desc,
 				GenerateRTPPackets: true,
 				Parent:             test.NilLogger,
@@ -279,8 +279,6 @@ func TestServerRead(t *testing.T) {
 
 				err = c.Start()
 				require.NoError(t, err)
-
-				defer func() { <-c.Wait() }()
 				defer c.Close()
 
 				time.Sleep(100 * time.Millisecond)
@@ -397,7 +395,6 @@ func TestServerRead(t *testing.T) {
 
 				err = c.Start()
 				require.NoError(t, err)
-				defer func() { <-c.Wait() }()
 				defer c.Close()
 
 				<-recv1
@@ -416,7 +413,7 @@ func TestServerDirectory(t *testing.T) {
 
 	strm := &stream.Stream{
 		WriteQueueSize:     512,
-		UDPMaxPayloadSize:  1472,
+		RTPMaxPayloadSize:  1450,
 		Desc:               desc,
 		GenerateRTPPackets: true,
 		Parent:             test.NilLogger,
@@ -465,7 +462,7 @@ func TestServerDynamicAlwaysRemux(t *testing.T) {
 
 	strm := &stream.Stream{
 		WriteQueueSize:     512,
-		UDPMaxPayloadSize:  1472,
+		RTPMaxPayloadSize:  1450,
 		Desc:               desc,
 		GenerateRTPPackets: true,
 		Parent:             test.NilLogger,
